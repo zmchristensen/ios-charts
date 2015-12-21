@@ -336,24 +336,18 @@ public class PieChartRenderer: ChartDataRendererBase
                 let x = (r * cos(((rotationAngle + absoluteAngles[cnt] - offset) * _animator.phaseY) * ChartUtils.Math.FDEG2RAD) + center.x)
                 let y = (r * sin(((rotationAngle + absoluteAngles[cnt] - offset) * _animator.phaseY) * ChartUtils.Math.FDEG2RAD) + center.y)
                 
-                print("start offset: \(offset)")
                 let norm_offset = offset > 45.0 ? 45.0 : offset
                 let norm_x = x - center.x
                 let norm_y = y - center.y
                 let new_r = sqrt(pow(norm_x, 2.0) + pow(norm_y, 2.0)) - off
                 let chordLength = 2 * abs(sin(norm_offset)) * new_r
                 
-                print("norm_offset: \(norm_offset)")
-                print("x: \(x), norm_x \(norm_x)")
-                print("y: \(y), norm_y \(norm_y)")
-                print("r: \(new_r)")
-                print("chordLength: \(chordLength)")
-                
                 totalImageDimension += CGFloat(0.5 * min(chordLength, new_r))
                 
                 cnt++
             }
             
+            //reset the cnt count back to where it was before previous loop
             cnt = startCnt
             let imageDimension = totalImageDimension / CGFloat(min(ceil(CGFloat(entries.count) * _animator.phaseX), CGFloat(entries.count)))
             
